@@ -22,7 +22,7 @@ public:
 
     Complex(Complex const& uNum) : Complex(uNum._re, uNum._im){}
 
-    void getConj(){ _im = -_im; }
+    Complex Conj(){ return Complex(_re, -_im); }
 
     int getRe() const { return _re; }
     int getIm() const { return _im; }
@@ -49,7 +49,6 @@ int main()
     copy_c_num.getPrint();
     std::cout << '\n';
     std::cout << c_num.getAbs() << '\n';
-    copy_c_num.getConj();
-    copy_c_num.getPrint();
+    copy_c_num.Conj().getPrint();
     return 0;
 }
