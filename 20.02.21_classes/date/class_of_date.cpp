@@ -57,7 +57,7 @@ public:
         _year = uYear;
     }
 
-    void getDate()
+    void getDate() const
     {
         if (_day < 10)
             std::cout << '0';
@@ -68,7 +68,7 @@ public:
         std::cout << _year << '\n';
     }
 
-    int diffOfDate(Date& secondDate)
+    int diffOfDate(Date const& secondDate)
     {
         int orig = days_from_Jesus(_day, _month, _year);
         int second = days_from_Jesus(secondDate._day,
@@ -80,7 +80,7 @@ public:
 
 int main()
 {
-    char day_today[] = "20.02.2021";
+    char day_today[] = "21.02.2021";
     Date mybirth(28, 8, 2002);
     Date today(day_today);
     mybirth.getDate();

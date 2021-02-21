@@ -8,7 +8,7 @@ private:
     int _y_size;
     double** _data;
 
-    void checkPos(int posX, int posY)
+    void checkPos(int posX, int posY) const
     {
         if (posX >= _x_size || posY >= _y_size)
             throw "out of bounds!!@!!11!!\n";
@@ -33,18 +33,13 @@ public:
 
     Matrix(double** inData, int xSize, int ySize) //by another matrix
     {
-        _x_size = xSize;
-        _y_size = ySize;
-        _data = new double* [_x_size];
-        for (int i = 0; i < _x_size; ++i)
-           _data[i] = new double [_y_size];
-
+        Matrix(xSize, ySize);
         for (int i = 0; i < _x_size; ++i)
             for (int j = 0; j < _y_size; ++j)
                 _data[i][j] = inData[i][j];
     }
 
-    Matrix(Matrix& obj) : Matrix(obj._data, //copy
+    Matrix(Matrix const& obj) : Matrix(obj._data, //copy
                                  obj._x_size,
                                  obj._y_size)
     {
@@ -58,7 +53,7 @@ public:
         delete[] _data;
     }
 
-    void outInCon()
+    void outInCon() const
     {
         for (int j = 0; j < _y_size; ++j)
         {
@@ -75,17 +70,23 @@ public:
                 _data[i][j] = (rand() % (10 * max) - 10 * min) / 10.0;
     }
 
-    int getXSize() { return _x_size; }
+    int getXSize() const  { return _x_size; }
 
-    int getYSize() { return _y_size; }
+    int getYSize() const  { return _y_size; }
 
-    double getElement(int posX, int posY)
+    double getElement(int posX, int posY) const
     {
         checkPos(posX, posY);
         return _data[posX][posY];
     }
 
-    double ortOfMatrix()
+    void changeElement(int posX, int posY, double value)
+    {
+        checkPos(posX, posY);
+        _data[posX][posY] = value;
+    }
+
+    double ortOfMatrix() const
     {
         double ort = 0;
         for (int j = 0; j < _y_size; ++j)
