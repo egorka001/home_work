@@ -1,3 +1,6 @@
+#ifndef DOT_H
+#define DOT_H
+
 #include <iostream>
 
 class Dot
@@ -25,14 +28,4 @@ class Dot
         void changeYDot(double uY) { _y = uY; }
 };
 
-int main()
-{
-    Dot tmp(10, 10);
-    std::cout << "xDot: " << tmp.getXDot() << '\n';
-    std::cout << "yDot: " << tmp.getYDot() << '\n';
-    tmp.changeXDot(-10);
-    tmp.changeYDot(-10);
-    std::cout << "xDot: " << tmp.getXDot() << '\n';
-    std::cout << "yDot: " << tmp.getYDot() << '\n';
-    return 0;
-}
+#endif
