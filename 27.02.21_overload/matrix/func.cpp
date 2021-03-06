@@ -54,7 +54,7 @@ void Matrix::fillRandNum(int min, int max)
 {
     for (int j = 0; j < _y_size; ++j)
         for (int i = 0; i < _x_size; ++i)
-            _data[i][j] = int((rand() % (10 * max) - 10 * min) / 10.0);
+            _data[i][j] = (rand() % (10 * max) - 10 * min) / 10.0;
 }
 
 double Matrix::getElement(int posX, int posY) const

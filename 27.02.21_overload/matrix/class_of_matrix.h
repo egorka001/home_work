@@ -93,15 +93,15 @@ inline Matrix operator* (Matrix const& second, Matrix const& first)
 {
     if(first.getXSize() != second.getYSize())
         throw "wake up neo wrong sizes!\n";
-    Matrix sum(first.getYSize(), second.getXSize());
+    Matrix mult(first.getYSize(), second.getXSize());
     for (int i = 0; i < first.getYSize(); ++i)
         for (int j = 0; j < second.getXSize(); ++j)
             for (int k = 0; k < first.getXSize(); ++k)
-                sum.changeElement(i, j,
-                        sum.getElement(i, j) + 
+                mult.changeElement(i, j,
+                        mult.getElement(i, j) + 
                         first.getElement(i, k) * 
                         second.getElement(k, j));
-    return sum;
+    return mult;
 }
 
 #endif
