@@ -1,58 +1,54 @@
 #include <iostream>
+#include <ctime>
 #include "unit_class.h"
 #include "fighters_class.h"
+#include "header.h"
 
-const int amount = 5;
-int alien_hp = 100;
-int alien_str = 50;
-int predator_hp = 50;
-int predator_str = 80;
-
-void printAllFighters(Alien** alien_arr, Predator** predator_arr)
-{
-    std::cout << "Alien forces!\n";
-    for (int i = 0; i < amount; ++i)
-        alien_arr[i] -> printStat();
-
-    std::cout << "Predator forces!\n";
-    for (int i = 0; i < amount; ++i)
-        predator_arr[i] -> printStat();
-}
+const int amount = 3;
 
 int main()
 {
-    Alien** alien_arr = new Alien*[amount];
-    for (int i = 0; i < amount; ++i)
-        alien_arr[i] = new Alien(alien_hp, alien_str);
-
-    Predator** predator_arr = new Predator*[amount];
-    for (int i = 0; i < amount; ++i)
-        predator_arr[i] = new Predator(predator_hp, predator_hp);
-
-    printAllFighters(alien_arr, predator_arr);
+    Unit** alien_arr;
+    Unit** predator_arr;
     
-    while(true)
+    char next[100];
+    
+    int alien_attack, predator_attack;
+    srand(time(0));
+    fighters_born(alien_arr, predator_arr, amount);
+   
+    printAllFighters(alien_arr, predator_arr, amount); 
+    
+    while(team_alive(alien_arr, amount) &&
+          team_alive(predator_arr, amount)) 
     {
-        alien_arr[]
+        alien_attack = choose_fighter(alien_arr, amount);
+        predator_attack = choose_fighter(predator_arr, amount); 
+        if(rand() % 2){
+            alien_arr[alien_attack] -> hit(*predator_arr[predator_attack]);
+            std::cout << alien_attack << " alien is goint to attack ";
+            std::cout << predator_attack << " predator!\n\n";
+            alien_arr[alien_attack] -> roar();
+            std::cout << ": alien says!\n\n\n"; 
+        }
+        else{
+            predator_arr[predator_attack] -> hit(*alien_arr[alien_attack]); 
+            std::cout << predator_attack << " predator is goint to attack ";
+            std::cout << alien_attack << " alien!\n\n"; 
+            predator_arr[predator_attack] -> roar();
+            std::cout << ": predator says!\n\n\n";
+        }
+        std::cout << "Input anything to continue...";
+        std::cin >> next;
+        printAllFighters(alien_arr, predator_arr, amount); 
     }
-/*
-    alien_arr[1] -> hit(*alien_arr[2]);
 
-    std::cout << "\n";
-    printAllFighters(alien_arr);
+    if(team_alive(alien_arr, amount))
+        std::cout << "Alien team wins!\n";
+    else
+        std::cout << "Predator team wins!\n";    
 
-    alien_arr[2] -> heal();
-
-    std::cout << "\n";
-    printAllFighters(alien_arr);
-*/
-    for (int i = 0; i < amount; ++i)
-        delete[] alien_arr[i];
-    delete[] alien_arr;
-
-    for (int i = 0; i < amount; ++i)
-        delete[] predator_arr[i];
-    delete[] predator_arr;
+    fighters_genocide(alien_arr, predator_arr, amount);
 
     return 0;
 }

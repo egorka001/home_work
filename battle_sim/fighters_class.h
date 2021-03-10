@@ -6,35 +6,17 @@
 class Alien : public Unit
 {
     public:
-        Alien()
-        {
-            _health = 0;
-            _strength = 0;
-        }
-        Alien(int uHealth, int uStrength)
-        {
-            _health = uHealth;
-            cHealth = uHealth;
-            _strength = uStrength;
-        }
-        void roar() { std::cout << "ashhhhh!"; }
+        Alien() : Unit() {}
+        Alien(int uHealth, int uStrength) : Unit(uHealth, uStrength) {}
+        virtual void roar() { std::cout << "alien"; }
 };
 
 class Predator : public Unit
 {
     public:
-        Predator()
-        {
-            _health = 0;
-            _strength = 0;
-        }
-        Predator(int uHealth, int uStrength)
-        {
-            _health = uHealth;
-            cHealth = uHealth;
-            _strength = uStrength;
-        }
-        void roar() { std::cout << "Predator master race!"; }
+        Predator() : Unit() {}
+        Predator(int uHealth, int uStrength) : Unit(uHealth, uStrength) {}
+        virtual void roar() { std::cout << "predator"; }
 };
 
 #endif
